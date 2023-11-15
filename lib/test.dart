@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,7 +36,7 @@ class ProductListScreen extends StatelessWidget {
     Product(
       id: '1',
       name: 'Fanta Jeruk',
-      description: 'Description for Product 1',
+      description: 'Fanta rasa Jeruk',
       price: 10,
       imageUrl:
           'https://images.tokopedia.net/img/cache/700/hDjmkQ/2022/12/6/d3b1c185-d9c0-4607-b18c-f7a8062ac641.jpg',
@@ -43,7 +44,7 @@ class ProductListScreen extends StatelessWidget {
     Product(
       id: '2',
       name: 'Coca-Cola',
-      description: 'Description for Product 2',
+      description: 'Coca Cola',
       price: 12.5,
       imageUrl:
           'https://images.tokopedia.net/img/cache/700/hDjmkQ/2022/12/6/d3b1c185-d9c0-4607-b18c-f7a8062ac641.jpg',
@@ -56,7 +57,7 @@ class ProductListScreen extends StatelessWidget {
       imageUrl:
           'https://images.tokopedia.net/img/cache/700/hDjmkQ/2022/12/6/d3b1c185-d9c0-4607-b18c-f7a8062ac641.jpg',
     ),
-    // Add more products as needed
+
   ];
 
   @override
@@ -64,57 +65,95 @@ class ProductListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Godrej'),
-        backgroundColor: Colors.red, // Warna merah pada app bar
+        backgroundColor: Colors.red, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Implement back button functionality
+
           },
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              // Implement search functionality
+
             },
           ),
           IconButton(
             icon: Icon(Icons.mail),
             onPressed: () {
-              // Implement inbox functionality
+
             },
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.red, // Warna merah pada foto toko
-              backgroundImage: AssetImage(
-                  'assets/store_image.jpg'), // Ganti dengan path gambar toko
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.red, 
+                backgroundImage: AssetImage(
+                    'assets/store_image.jpg'), 
+              ),
             ),
-          ),
-          const Text(
-            'Nama Toko',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            const Text(
+              'Nama Toko',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const Text(
-            'Jumlah Pengikut: 1000', // Ganti dengan jumlah pengikut yang sesuai
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // Implement fungsi tombol mengikuti
-            },
-            child: Text('Mengikuti'),
-          ),
-          Expanded(
-            child: ListView.builder(
+            const Text(
+              'Jumlah Pengikut: 1000', 
+            ),
+            ElevatedButton(
+              onPressed: () {
+              },
+              child: Text('Mengikuti'),
+            ),
+            const SizedBox(
+                height: 16.0),
+            CarouselSlider(
+              items: [
+                Image.network(
+                    'https://s3.bukalapak.com/uploads/attachment/830801/kupon_bukalapak_diskon.jpg')
+              ],
+              options: CarouselOptions(
+                height: 200.0,
+                enlargeCenterPage: true,
+                autoPlay: true,
+                aspectRatio: 16 / 9,
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enableInfiniteScroll: true,
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                viewportFraction: 0.8,
+              ),
+            ),
+
+            const SizedBox(
+                height:
+                    16.0), 
+            CarouselSlider(
+              items: [
+                Image.network(
+                    'https://s0.bukalapak.com/athena/microsite-lite/original/3045e220-eb7e-fbc0-d4c9-66d3551fca5e.webp.webp')
+              ],
+              options: CarouselOptions(
+                height: 200.0,
+                enlargeCenterPage: true,
+                autoPlay: true,
+                aspectRatio: 16 / 9,
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enableInfiniteScroll: true,
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                viewportFraction: 0.8,
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
               itemCount: products.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -129,18 +168,16 @@ class ProductListScreen extends StatelessWidget {
                   ),
                   trailing: ElevatedButton(
                     onPressed: () {
-                      // Implement fungsi tombol masukkan dalam keranjang
                     },
                     child: Text('Masukkan dalam keranjang'),
                   ),
                   onTap: () {
-                    // Implement navigasi ke halaman detail produk
                   },
                 );
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
